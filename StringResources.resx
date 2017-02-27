@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Hub_NoteEditor_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Hub_NoteEditor_Label" xml:space="preserve">
+    <value>Edit Note:</value>
+  </data>
+  <data name="Hub_NoteEditor_Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Hub_NoteEditor_Title" xml:space="preserve">
+    <value>Edit Note</value>
+  </data>
+  <data name="Hub_ProFileHubHeader" xml:space="preserve">
+    <value>ProFile Hub</value>
+  </data>
+  <data name="Hub_SetUp_BrowseButtonString" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Hub_SetUp_Description" xml:space="preserve">
+    <value>To use ProFile HUB you will need to link to your clients’ files. During setup ProFile HUB will ready your files, so you may invite and collaborate with your clients.</value>
+  </data>
+  <data name="Hub_SetUp_FileStorage" xml:space="preserve">
+    <value>Where are your client files stored?</value>
+  </data>
+  <data name="Hub_SetUp_FileStorageType" xml:space="preserve">
+    <value>How are your ProFile client files stored?</value>
+  </data>
+  <data name="Hub_SetUp_InvalidFolderString" xml:space="preserve">
+    <value>The following file path is invalid</value>
+  </data>
+  <data name="Hub_SetUp_LocalServerString" xml:space="preserve">
+    <value>Local Server - only you can access</value>
+  </data>
+  <data name="Hub_SetUp_MultipleFolderInfoString" xml:space="preserve">
+    <value>Selecting this option will scan your entire computer for ProFile files.</value>
+  </data>
+  <data name="Hub_SetUp_MultipleFolderString" xml:space="preserve">
+    <value>My files are in multiple folders.</value>
+  </data>
+  <data name="Hub_SetUp_NetworkProhibitedString" xml:space="preserve">
+    <value>Network Server is currently unavailable! Please choose a local folder.</value>
+  </data>
+  <data name="Hub_SetUp_NetworkServerSelectedString" xml:space="preserve">
+    <value>Only one user may work on a file at a time. Additional users will get a 'file locked' message until the first user closes/saves the file.</value>
+  </data>
+  <data name="Hub_SetUp_NetworkServerString" xml:space="preserve">
+    <value>Network Server – shared server on the network</value>
+  </data>
+  <data name="Hub_SetUp_Note" xml:space="preserve">
+    <value>Currently, Hub and Link only work with Tax Year 2015 and 2016 T1/TP1 files.</value>
+  </data>
+  <data name="Hub_SetUp_NoteText" xml:space="preserve">
+    <value>Note: </value>
+  </data>
+  <data name="Hub_SetUp_ReadFileButtonString" xml:space="preserve">
+    <value>Read files</value>
+  </data>
+  <data name="Hub_SetUp_Title" xml:space="preserve">
+    <value>ProFile Hub Set Up</value>
+  </data>
+  <data name="Hub_T1_File_Name_Header" xml:space="preserve">
+    <value>FILE NAME</value>
+  </data>
+  <data name="ImportantMessageString" xml:space="preserve">
+    <value>Important Message</value>
+  </data>
+  <data name="Hub_T1_Intuit_Link_Header" xml:space="preserve">
+    <value>INTUIT LINK</value>
+  </data>
+  <data name="Hub_T1_Last_Note_Header" xml:space="preserve">
+    <value>COMMENTS</value>
+  </data>
+  <data name="HUB_T1_Last_Saved_Header" xml:space="preserve">
+    <value>LAST SAVED</value>
+  </data>
+  <data name="Hub_T1_Name_Header" xml:space="preserve">
+    <value>NAME</value>
+  </data>
+  <data name="Hub_T1_Status_Header" xml:space="preserve">
+    <value>STATUS</value>
+  </data>
+  <data name="NotificationSettings_ToolTip" xml:space="preserve">
+    <value>ProFile Notification Centre</value>
+  </data>
+  <data name="Notifications_MessageBox_Title" xml:space="preserve">
+    <value>ProFile Notification</value>
+  </data>
+  <data name="Notifications_MultipleMessages_Message_Key" xml:space="preserve">
+    <value>You have mutiple notifications. Please open the ProFile Notification Centre to view these notifications</value>
+  </data>
+  <data name="Notifications_MultipleMessages_Title_Key" xml:space="preserve">
+    <value>ProFile Notification(s)</value>
+  </data>
+  <data name="Notifications_ProFileMessageCenter_Key" xml:space="preserve">
+    <value>ProFile Notification Centre</value>
+  </data>
+  <data name="Notifications_ProfileMessageCenter_Tooltip_Key" xml:space="preserve">
+    <value>Click here for more ...</value>
+  </data>
+  <data name="Notifications_Settings_ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Notifications_Settings_DND" xml:space="preserve">
+    <value>Do Not Disturb</value>
+  </data>
+  <data name="Notifications_Settings_OpenCenter" xml:space="preserve">
+    <value>Open Notification Centre</value>
+  </data>
+  <data name="Notifications_Settings_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Hub_T1_Client_Info_Header" xml:space="preserve">
+    <value>CLIENT INFORMATION</value>
+  </data>
+  <data name="Hub_T1_Data_Collection_Header" xml:space="preserve">
+    <value>DATA COLLECTION</value>
+  </data>
+  <data name="Hub_T1_Notes_And_Status_Header" xml:space="preserve">
+    <value>NOTES AND STATUS</value>
+  </data>
+  <data name="Hub_Enable_TextKey" xml:space="preserve">
+    <value>Enable ProFile Hub</value>
+  </data>
+  <data name="Hub_Setup_BetaNoticeMessage_Key" xml:space="preserve">
+    <value>This feature is currently under BETA and is purely for Preview purposes.</value>
+  </data>
+  <data name="Hub_Setup_SetupButton_Key" xml:space="preserve">
+    <value>Go to setup</value>
+  </data>
+  <data name="Hub_Setup_WelcomeMessageHeader_Key" xml:space="preserve">
+    <value>Welcome to ProFile Hub</value>
+  </data>
+  <data name="Hub_Setup_WelcomeMessage_Key" xml:space="preserve">
+    <value>ProFile Hub is the digital assistant which helps you manage your clients’ documents.</value>
+  </data>
+  <data name="Hub_FailToIndexMessage_Key" xml:space="preserve">
+    <value>ProFile Hub has encountered errors while trying to index some of the files. Please ensure that the files are not currently in use and try again later.</value>
+  </data>
+  <data name="HUB_Add_Note_Key" xml:space="preserve">
+    <value>Add Note</value>
+  </data>
+  <data name="HUB_Note_Adding_MessageKey" xml:space="preserve">
+    <value>Please wait we add the note to the file</value>
+  </data>
+  <data name="HUB_Setup_Progress_Message" xml:space="preserve">
+    <value>Please wait while we index the files for you</value>
+  </data>
+  <data name="HUB_Setup_Warning_Message" xml:space="preserve">
+    <value>This operation will clear the existing data within Hub. Are you sure you want to proceed?</value>
+  </data>
+  <data name="HUB_UpdateLinkStatusProgressMessage" xml:space="preserve">
+    <value>Please wait while we update the link status for you</value>
+  </data>
+  <data name="FileStatus_CarriedForward" xml:space="preserve">
+    <value>Carried Forward</value>
+  </data>
+  <data name="FileStatus_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="FileStatus_InPartnerReview" xml:space="preserve">
+    <value>In Partner Review</value>
+  </data>
+  <data name="FileStatus_InPreparerReview" xml:space="preserve">
+    <value>In Preparer Review</value>
+  </data>
+  <data name="FileStatus_NotFiling" xml:space="preserve">
+    <value>Not Filing</value>
+  </data>
+  <data name="FileStatus_Printed" xml:space="preserve">
+    <value>Printed</value>
+  </data>
+  <data name="FileStatus_ReadyToPrint" xml:space="preserve">
+    <value>Ready To Print</value>
+  </data>
+  <data name="FileStatus_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="FileStatus_WaitingForClient" xml:space="preserve">
+    <value>Waiting For Client</value>
+  </data>
+  <data name="FileStatus_WorkInProgress" xml:space="preserve">
+    <value>Work In Progress</value>
+  </data>
+  <data name="Hub_ClientFileStatusUpdateProgressMessage" xml:space="preserve">
+    <value>Please wait while we update the status of the file for you</value>
+  </data>
+  <data name="Hub_EmailTitleKey" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="Hub_NotAvailableMessage" xml:space="preserve">
+    <value>ProFile Hub is coming soon! It’s currently in Beta. If you would like to participate in the Beta please email: Graham_Sharples@intuit.com</value>
+  </data>
+  <data name="Hub_SetUp_InvalidFolderStringNotLocal" xml:space="preserve">
+    <value>The following path is not supported as it is not a local disk</value>
+  </data>
+  <data name="HUB_NoItemSelectedKey" xml:space="preserve">
+    <value>No Item Selected</value>
+  </data>
+  <data name="HUB_CharacterLengthLimitMessage" xml:space="preserve">
+    <value>characters remaining</value>
+  </data>
+  <data name="HUB_LinkSignInMessage" xml:space="preserve">
+    <value>Click here to Login in order to use Intuit Link</value>
+  </data>
+  <data name="Hub_ActionBar_AllString" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Hub_AvailableString" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="Hub_IndexingFilesString" xml:space="preserve">
+    <value>Indexing Files...</value>
+  </data>
+  <data name="Hub_SelectionStatusMessage" xml:space="preserve">
+    <value>Total Client(s):  {0} | Selected Client(s):  {1}</value>
+  </data>
+  <data name="Hub_ServiceStatusMessage" xml:space="preserve">
+    <value>ProFile Hub Service: {0}</value>
+  </data>
+  <data name="Hub_T1ActionBar_ActionsString" xml:space="preserve">
+    <value>Action(s)</value>
+  </data>
+  <data name="Hub_T1Action_FileOpenString" xml:space="preserve">
+    <value>Please wait while we open the file for you...</value>
+  </data>
+  <data name="Hub_T1Action_OpenFileString" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="Hub_T1Action_SelectFileInfoString" xml:space="preserve">
+    <value>Please select files for other actions!</value>
+  </data>
+  <data name="Hub_T1Action_SelectFileString" xml:space="preserve">
+    <value>Please Select Files</value>
+  </data>
+  <data name="Hub_UnavailableString" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="Hub_T1ActionBar_TooltipString" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Hub_SearchLabelKey" xml:space="preserve">
+    <value>Search (Client Name or File Name)</value>
+  </data>
+  <data name="Hub_SetUp_InvalidNetworkFolderString" xml:space="preserve">
+    <value>The following path is not supported as it is not a network disk</value>
+  </data>
+  <data name="Hub_FolderNotAvailable" xml:space="preserve">
+    <value>The location for files is currently unavailable. If they are located on a network drive please check network connection. If you wish to change the location of files click Go to Setup.</value>
+  </data>
+  <data name="Hub_FolderNotAvailableHeader" xml:space="preserve">
+    <value>The Location for the Files is Unavailable</value>
+  </data>
+  <data name="CRAImportBrowserLaunchNotificationKey" xml:space="preserve">
+    <value>CRA Website has been launched in a seperate browser window</value>
+  </data>
+  <data name="CRAImportCancelKey" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CRAImportDownloadingDataTitleKey" xml:space="preserve">
+    <value>CRA Data Import</value>
+  </data>
+  <data name="CRAImportDownloadingDescriptionKey" xml:space="preserve">
+    <value>Ready to import data into ProFile</value>
+  </data>
+  <data name="CRAImportManualLoginInstructionOneKey" xml:space="preserve">
+    <value>Please log in to the site</value>
+  </data>
+  <data name="CRAImportManualLoginInstructionTwoKey" xml:space="preserve">
+    <value>Enter your client's SINs to start importing data into ProFile</value>
+  </data>
+  <data name="CRAImportSecureLogInTextKey" xml:space="preserve">
+    <value>Secure Log In</value>
+  </data>
+  <data name="CRAImportSelectedClientsTitleKey" xml:space="preserve">
+    <value>Selected Client List</value>
+  </data>
+  <data name="CRAImportCloseKey" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CRAImportFailureMessage" xml:space="preserve">
+    <value>Connection failed. Please cancel this session and try again.</value>
+  </data>
+  <data name="CRAImportWebsiteFailureMessage" xml:space="preserve">
+    <value>Hang tight while we import your data into ProFile</value>
+  </data>
+  <data name="Hub_SettingsLocked_Key" xml:space="preserve">
+    <value>Click the lock to make changes.</value>
+  </data>
+  <data name="Hub_SettingsPasswordHeader_Key" xml:space="preserve">
+    <value>Options Password</value>
+  </data>
+  <data name="Hub_SettingsPasswordLabel_Key" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="Hub_SettingsUnlocked_Key" xml:space="preserve">
+    <value>Click the lock to prevent further changes.</value>
+  </data>
+  <data name="Hub_T1_CRAImport_Header" xml:space="preserve">
+    <value>CRA Import</value>
+  </data>
+  <data name="OnePay_ActivateLicense" xml:space="preserve">
+    <value>Click here to activate.</value>
+  </data>
+  <data name="OnePay_aRep" xml:space="preserve">
+    <value> with a representative.</value>
+  </data>
+  <data name="OnePay_BusinessNumberTitle" xml:space="preserve">
+    <value>Business number</value>
+  </data>
+  <data name="OnePay_carryForward" xml:space="preserve">
+    <value>to carry forward.</value>
+  </data>
+  <data name="OnePay_ClickHereLink" xml:space="preserve">
+    <value>Click Here </value>
+  </data>
+  <data name="OnePay_CorpNameTitle" xml:space="preserve">
+    <value>Legal name of corporation</value>
+  </data>
+  <data name="OnePay_ExistingLicense" xml:space="preserve">
+    <value>Already have a license?</value>
+  </data>
+  <data name="OnePay_FName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="OnePay_GetTrialLicense" xml:space="preserve">
+    <value>Get a Trial License</value>
+  </data>
+  <data name="OnePay_Important" xml:space="preserve">
+    <value>Important! </value>
+  </data>
+  <data name="OnePay_ImportantText" xml:space="preserve">
+    <value>Before clicking Next, make sure the above information is correct. You will not be able to change this information later. </value>
+  </data>
+  <data name="OnePay_ImportantTransactionCompleted" xml:space="preserve">
+    <value>ProFile automatically stores your OnePay authorization in the tax return file. You must save the file as soon as you click "Finish" to protect your purchase. </value>
+  </data>
+  <data name="OnePay_LearnMore" xml:space="preserve">
+    <value> or learn more by starting a </value>
+  </data>
+  <data name="OnePay_LicensePurchaseText" xml:space="preserve">
+    <value>You are about to purchase a ProFile OnePay license for the {0} T1/TP1. This license will allow you to prepare a single T1/TP1 tax return for the client specified below. </value>
+  </data>
+  <data name="OnePay_LicensePurchaseTitle" xml:space="preserve">
+    <value>OnePay License Purchase</value>
+  </data>
+  <data name="OnePay_LiveChatLink" xml:space="preserve">
+    <value>live chat</value>
+  </data>
+  <data name="OnePay_LName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="OnePay_MoreThan15Returns" xml:space="preserve">
+    <value>Doing 15 or more returns? </value>
+  </data>
+  <data name="OnePay_MoreThan4Returns" xml:space="preserve">
+    <value>Doing 4 or more returns? </value>
+  </data>
+  <data name="OnePay_ObtainLicense" xml:space="preserve">
+    <value>To obtain a free trial license code visit </value>
+  </data>
+  <data name="OnePay_Phone" xml:space="preserve">
+    <value> or call 1-800-452-9970</value>
+  </data>
+  <data name="OnePay_Proceedt2Text" xml:space="preserve">
+    <value>Click "Next" to purchase a OnePay license. This will provide you with the ability to prepare and file a single ProFile T2 return.</value>
+  </data>
+  <data name="OnePay_Proceedt3Text" xml:space="preserve">
+    <value>Click "Next" to purchase a OnePay license. This will provide you with the ability to prepare and file a single ProFile T3/TP-646 return.</value>
+  </data>
+  <data name="OnePay_ProceedText" xml:space="preserve">
+    <value>Click "Next" to purchase a OnePay license. This will provide you with the ability to prepare and file a single ProFile T1/TP1 return.</value>
+  </data>
+  <data name="OnePay_ProcessingText" xml:space="preserve">
+    <value>Please wait while we redirect you to our Purchase wizard.</value>
+  </data>
+  <data name="OnePay_ProcessingTitle" xml:space="preserve">
+    <value>Processing Request ....</value>
+  </data>
+  <data name="OnePay_ProfileLink" xml:space="preserve">
+    <value>profile.intuit.ca</value>
+  </data>
+  <data name="OnePay_PurchaseProfileTitle" xml:space="preserve">
+    <value>Purchase a ProFile OnePay</value>
+  </data>
+  <data name="OnePay_PurchaseUnlimitedLicenseLink" xml:space="preserve">
+    <value>Purchase our Unlimited License</value>
+  </data>
+  <data name="OnePay_Sin" xml:space="preserve">
+    <value>SIN</value>
+  </data>
+  <data name="OnePay_T2LicensePurchaseText" xml:space="preserve">
+    <value>You are about to purchase a ProFile OnePay license for the {0} T2. This license will allow you to prepare a single T2 tax return for the client specified below.</value>
+  </data>
+  <data name="OnePay_T3LicensePurchaseText" xml:space="preserve">
+    <value>You are about to purchase a ProFIle OnePay license for the {0} T3.  This license will allow you to prepare a single T3/TP-646 tax return for the client specified below.</value>
+  </data>
+  <data name="OnePay_TaxationEndYear" xml:space="preserve">
+    <value>taxation year end</value>
+  </data>
+  <data name="OnePay_TaxationStartYear" xml:space="preserve">
+    <value>Taxation year start</value>
+  </data>
+  <data name="OnePay_TransactionCompletedText" xml:space="preserve">
+    <value>Your online purchase transaction is completed. A purchase receipt will be sent to your email address.</value>
+  </data>
+  <data name="OnePay_TransactionCompletedTitle" xml:space="preserve">
+    <value>Transaction Completed</value>
+  </data>
+  <data name="OnePay_TrustNameTitle" xml:space="preserve">
+    <value>Name of the trust</value>
+  </data>
+  <data name="OnePay_TrustNumber" xml:space="preserve">
+    <value>Trust Number</value>
+  </data>
+  <data name="OnePay_ProceedTextCommon" xml:space="preserve">
+    <value> If you are carrying forward from a previous version of Profile, you must do so before continuing with OnePay. </value>
+  </data>
+  <data name="OnePay_TransactionIncompletedText" xml:space="preserve">
+    <value>We were unable to complete your transaction. Please try again later.</value>
+  </data>
+  <data name="OnePay_TransactionIncompletedTitle" xml:space="preserve">
+    <value>Transaction Incomplete</value>
+  </data>
+  <data name="OnePayCancelStringKey" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="OnePayNextStringKey" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="OnePayBackStringKey" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="OnePayValidationErrorInstructionKey" xml:space="preserve">
+    <value>Please correct the following error(s):</value>
+  </data>
+  <data name="OnePayValidationErrorInvalidName" xml:space="preserve">
+    <value> - Missing/Invalid Name</value>
+  </data>
+  <data name="OnePayValidationErrorInvalidSin" xml:space="preserve">
+    <value> - Missing/Invalid SIN number</value>
+  </data>
+  <data name="OnePayValidationErrorTitleKey" xml:space="preserve">
+    <value>Error(s)</value>
+  </data>
+  <data name="OnePayBrowserLoadMessageKey" xml:space="preserve">
+    <value>Please wait while we load the payment screen</value>
+  </data>
+  <data name="CRAImportActionText" xml:space="preserve">
+    <value>ACTION</value>
+  </data>
+  <data name="CRAImportAddAsNewKey" xml:space="preserve">
+    <value>Add As New</value>
+  </data>
+  <data name="CRAImportGovernmentDownloadedDataText" xml:space="preserve">
+    <value>GOVERNMENT DOWNLOADED DATA</value>
+  </data>
+  <data name="CRAImportLineItemText" xml:space="preserve">
+    <value>LINE ITEM</value>
+  </data>
+  <data name="CRAImportReplaceInfoKey" xml:space="preserve">
+    <value>Replace {0}</value>
+  </data>
+  <data name="CRAImportDetailsText" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="CRAImportDataImportCompletedTitleKey" xml:space="preserve">
+    <value>Data Import Completed</value>
+  </data>
+  <data name="CRAImportDataImportReviewStatus" xml:space="preserve">
+    <value>Please review the updated status list</value>
+  </data>
+  <data name="CRAImportFailureKey" xml:space="preserve">
+    <value>Failure</value>
+  </data>
+  <data name="CRAImportImportSelectedDataTitleKey" xml:space="preserve">
+    <value>Import Selected Data</value>
+  </data>
+  <data name="CRAImportReviewAndCompleteTitleKey" xml:space="preserve">
+    <value>Review and Complete</value>
+  </data>
+  <data name="CRAImportSuccessKey" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="CRAImportLaunchCRAWebsiteMessage" xml:space="preserve">
+    <value>Launch CRA Website</value>
+  </data>
+  <data name="CRAImportLogInMessage" xml:space="preserve">
+    <value>Log in and enter details</value>
+  </data>
+  <data name="CRAImportCollapseAllKey" xml:space="preserve">
+    <value>Collapse All</value>
+  </data>
+  <data name="OnePayFinishStringKey" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="OnePayRetryStringKey" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="CRAImportCheckAllText" xml:space="preserve">
+    <value>Check/UnCheck All</value>
+  </data>
+  <data name="CRAImportDataImportWorksheetText" xml:space="preserve">
+    <value>Data Import Worksheet</value>
+  </data>
+  <data name="CRAImportExpandAllKey" xml:space="preserve">
+    <value>Expand All</value>
+  </data>
+  <data name="CRAImportReviewDataText" xml:space="preserve">
+    <value>Review the imported data below</value>
+  </data>
+  <data name="CRAImportTitleKey" xml:space="preserve">
+    <value>CRA Data Import</value>
+  </data>
+  <data name="OnePayAttentionTitleKey" xml:space="preserve">
+    <value>Attention!</value>
+  </data>
+  <data name="OnePayPaymentMessagePartOne" xml:space="preserve">
+    <value> Your purchase is complete. You must</value>
+  </data>
+  <data name="OnePayPaymentMessagePartThree" xml:space="preserve">
+    <value> to apply your One Pay License</value>
+  </data>
+  <data name="OnePayPaymentMessagePartTwo" xml:space="preserve">
+    <value> close this window</value>
+  </data>
+  <data name="OnePayValidationErrorInvalidDate" xml:space="preserve">
+    <value>- Missing/Invalid Date</value>
+  </data>
+  <data name="CRAImportCostText" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="CRAImportGrossText" xml:space="preserve">
+    <value>Gross</value>
+  </data>
+  <data name="CRAImportHistoryText" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="CRAImportIssuerText" xml:space="preserve">
+    <value>Issuer</value>
+  </data>
+  <data name="CRAImportWelcomeDescription" xml:space="preserve">
+    <value>Quick. Easy. Secure</value>
+  </data>
+  <data name="CRAImportWelcomeHelpOne" xml:space="preserve">
+    <value>Save time by automatically importing client information</value>
+  </data>
+  <data name="CRAImportWelcomeHelpTwo" xml:space="preserve">
+    <value>Prevent manual data entry errors</value>
+  </data>
+  <data name="CRAImportWelcomeMessage" xml:space="preserve">
+    <value>ProFile CRA Data Import</value>
+  </data>
+  <data name="CRAImportWelcomeHelpThree" xml:space="preserve">
+    <value>Ensure client data is always accurate and up-to-date</value>
+  </data>
+  <data name="CRAImportWelcomeCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CRAImportWelcomeLaunch" xml:space="preserve">
+    <value>Launch CRA Import Website</value>
+  </data>
+  <data name="CRAImportNoSlipsForSelectedClientsMessageKey" xml:space="preserve">
+    <value>Note: Some information may have been imported to ProFile (e.g. CDE info, Instalments, etc will be found in the Data Import Summary)</value>
+  </data>
+  <data name="CRAImportNoNameSelected" xml:space="preserve">
+    <value>No Name</value>
+  </data>
+  <data name="OnePayPaymentScreenTitle" xml:space="preserve">
+    <value>Payment Screen</value>
+  </data>
+  <data name="OnePayValidationErrorInvalidBN" xml:space="preserve">
+    <value>- Missing/Invalid Business number</value>
+  </data>
+</root>

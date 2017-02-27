@@ -1,0 +1,569 @@
+﻿<Window x:Class="T5008SlipView.MainWindow"      
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:local="clr-namespace:T5008SlipView"
+        xmlns:ViewModels="clr-namespace:T5008SlipView.ViewModels"
+        xmlns:converters="clr-namespace:T5008SlipView.Converters" 
+        
+        d:DataContext="{d:DesignInstance ViewModels:DesignModel_GroupByIssuer, IsDesignTimeCreatable=True}"
+        Title="MainWindow" Height="500" Width="1024">
+    <Grid>
+        <Grid.Resources>
+            
+            <!--Expander no togglebutton template-->
+            <SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="#FF3C7FB1"/>
+            <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="Transparent"/>
+            <SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="#222"/>
+            <SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="#FF526C7B"/>
+            <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="Transparent"/>
+            <SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="#FF003366"/>
+            <SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="DarkGray"/>
+            <SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="Transparent"/>
+            <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="#666"/>
+            <SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="Transparent"/>
+            <SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="DarkGray"/>
+            <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="#666"/>
+            <Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+
+                                    <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <!--<Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>-->
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>-->
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>-->
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>-->
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderUpHeaderStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+
+                                    <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <!--<Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>-->
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>-->
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>-->
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>-->
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderLeftHeaderStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+
+                                    <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <!--<Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>-->
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>-->
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>-->
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>-->
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderHeaderFocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border>
+                                <Rectangle Margin="0" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                    <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <!--<Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>-->
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>-->
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>-->
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <!--<Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>-->
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderNoGlyph" TargetType="{x:Type Expander}">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Expander}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="3" SnapsToDevicePixels="true">
+                                <DockPanel>
+                                    <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" Content="{TemplateBinding Header}" DockPanel.Dock="Top" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" MinWidth="0" MinHeight="0" Padding="{TemplateBinding Padding}" Style="{StaticResource ExpanderDownHeaderStyle}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <ContentPresenter x:Name="ExpandSite" DockPanel.Dock="Bottom" Focusable="false" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </DockPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsExpanded" Value="true">
+                                    <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="ExpandDirection" Value="Right">
+                                    <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Right"/>
+                                    <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Left"/>
+                                    <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderRightHeaderStyle}"/>
+                                </Trigger>
+                                <Trigger Property="ExpandDirection" Value="Up">
+                                    <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Top"/>
+                                    <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Bottom"/>
+                                    <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderUpHeaderStyle}"/>
+                                </Trigger>
+                                <Trigger Property="ExpandDirection" Value="Left">
+                                    <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Left"/>
+                                    <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Right"/>
+                                    <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderLeftHeaderStyle}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--Expander with no togglebutton -->
+            <!-- T5008 Styles -->
+            <converters:ListToTopItemConverter x:Key="ListToTopItemConverter"></converters:ListToTopItemConverter>
+            <converters:GrossProceedsConverter x:Key="GrossProceedsConverter"></converters:GrossProceedsConverter>
+            <converters:CostConverter x:Key="CostConverter"></converters:CostConverter>
+            <Style TargetType="GridViewColumnHeader" x:Key="craGridViewColumnHeaderStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type GroupItem}" x:Key="craT5008ExpanderGroupStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupItem}" >
+                            <Expander x:Name="MultipleIssuerExpanderGroupStyle"  BorderBrush="#FFA4B97F" BorderThickness="0,0,0,1"  Style="{DynamicResource ExpanderNoGlyph}">
+
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal" Height="40" >
+                                        <ContentPresenter>
+                                            <ContentPresenter.Content>
+                                                <Grid>
+                                                    <ListView ItemsSource="{Binding Items, Converter={StaticResource ListToTopItemConverter}}"  BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown">
+
+                                                        <ListView.ItemContainerStyle>
+                                                            <Style TargetType="ListViewItem">
+
+
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="White" />
+                                                                    </Trigger>
+
+                                                                </Style.Triggers>
+                                                                <Setter Property="Height" Value="40" />
+                                                                <Setter Property="BorderBrush" Value="#BABEC5" />
+                                                                <Setter Property="BorderThickness" Value="0,0,0,0.5" />
+                                                                <Setter Property="Background" Value="White" />
+                                                                <Setter Property="Focusable" Value="false" />
+
+                                                            </Style>
+
+                                                        </ListView.ItemContainerStyle>
+
+                                                        <ListView.View>
+                                                            <GridView>
+                                                                <GridView.ColumnHeaderContainerStyle>
+                                                                    <Style TargetType="GridViewColumnHeader">
+                                                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                                    </Style>
+                                                                </GridView.ColumnHeaderContainerStyle>
+                                                                <GridViewColumn Width="300"  >
+                                                                    <GridViewColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <StackPanel Orientation="Horizontal">
+                                                                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding IsSelected}"/>
+                                                                                <TextBlock HorizontalAlignment="Center" Margin="10,0,0,0" FontSize="14" Text="{Binding History}" />
+                                                                                <Button>
+                                                                                    <Button.Template>
+                                                                                        <ControlTemplate>
+                                                                                            <Border Width="20"  Height="16" Background="Gray" Margin="5,0,0,0" CornerRadius="10,10,10,10" >
+                                                                                                <TextBlock Foreground="White" Text="{Binding DataContext.Items.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Expander}}" HorizontalAlignment="Center"></TextBlock>
+                                                                                            </Border>
+                                                                                        </ControlTemplate>
+                                                                                    </Button.Template>
+                                                                                </Button>
+                                                                            </StackPanel>
+                                                                        </DataTemplate>
+                                                                    </GridViewColumn.CellTemplate>
+
+                                                                </GridViewColumn>
+                                                                <GridViewColumn Width="150" DisplayMemberBinding="{Binding Issuer}" ></GridViewColumn>
+                                                                <GridViewColumn Width="133" DisplayMemberBinding="{Binding DataContext.Items, Converter={StaticResource GrossProceedsConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Expander}}" ></GridViewColumn>
+                                                                <GridViewColumn Width="133" DisplayMemberBinding="{Binding DataContext.Items, Converter={StaticResource CostConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Expander}}" ></GridViewColumn>
+                                                                <GridViewColumn Width="200"
+                                                                        Header="Action">
+                                                                    <GridViewColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <ComboBox Width="180"
+                                                                              Height="30"
+                                                                              FontSize="14"
+                                                                              VerticalAlignment="Center"
+                                                                              HorizontalAlignment="Center"
+                                                                              ItemsSource="{Binding SlipActionList}"
+                                                                              SelectedItem="{Binding SelectedAction}" >
+                                                                                <ComboBox.ItemTemplate>
+                                                                                    <DataTemplate>
+                                                                                        <TextBlock Text="{Binding }" />
+                                                                                    </DataTemplate>
+                                                                                </ComboBox.ItemTemplate>
+                                                                            </ComboBox>
+                                                                        </DataTemplate>
+                                                                    </GridViewColumn.CellTemplate>
+                                                                </GridViewColumn>
+                                                            </GridView>
+                                                        </ListView.View>
+
+                                                    </ListView>
+
+                                                </Grid>
+                                            </ContentPresenter.Content>
+                                        </ContentPresenter>
+                                    </StackPanel>
+                                </Expander.Header>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsPresenter></ItemsPresenter>
+                                </StackPanel>
+                            </Expander>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type GroupItem}" x:Key="craT5008GroupStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+
+                        <ControlTemplate TargetType="{x:Type GroupItem}"  >
+                            <StackPanel Orientation="Horizontal" Height="40">
+
+                                <ContentPresenter>
+                                    <ContentPresenter.Content>
+                                        <Grid>
+                                            <ListView ItemsSource="{Binding Items, Converter={StaticResource ListToTopItemConverter}}"  BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden"  PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" >
+                                                <ListView.ItemContainerStyle>
+                                                    <Style TargetType="ListViewItem">
+
+
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="White" />
+                                                            </Trigger>
+
+                                                        </Style.Triggers>
+                                                        <Setter Property="Height" Value="40" />
+                                                        <Setter Property="BorderBrush" Value="#BABEC5" />
+                                                        <Setter Property="BorderThickness" Value="0,0,0,0.5" />
+                                                        <Setter Property="Background" Value="White" />
+                                                        <Setter Property="Focusable" Value="false" />
+
+                                                    </Style>
+
+                                                </ListView.ItemContainerStyle>
+
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridView.ColumnHeaderContainerStyle>
+                                                            <Style TargetType="GridViewColumnHeader">
+                                                                <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                            </Style>
+                                                        </GridView.ColumnHeaderContainerStyle>
+                                                        <GridViewColumn Width="300" Header="History">
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <CheckBox HorizontalAlignment="Center" IsChecked="{Binding IsSelected}" />
+                                                                        <TextBlock HorizontalAlignment="Center" Margin="10,0,0,0" FontSize="14" Text="{Binding History}" />
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+
+                                                        <GridViewColumn Width="150" Header="Issuer">
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Issuer}" />
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+
+                                                        <GridViewColumn Width="133" Header="Gross">
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Gross}" />
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+
+                                                        <GridViewColumn Width="133" Header="Cost">
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Width="80"
+                                                                       HorizontalAlignment="Center"
+                                                                       Text="{Binding Cost}" />
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                        <GridViewColumn Width="200" Header="Action">
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <ComboBox Width="180"
+                                                                        Height="30"
+                                                                        FontSize="14"
+                                                                        VerticalAlignment="Center"
+                                                                        HorizontalAlignment="Center"
+                                                                        ItemsSource="{Binding SlipActionList}"
+                                                                        SelectedItem="{Binding SelectedAction}" >
+                                                                        <ComboBox.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <TextBlock Text="{Binding }" />
+                                                                            </DataTemplate>
+                                                                        </ComboBox.ItemTemplate>
+                                                                    </ComboBox>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                    </GridView>
+                                                </ListView.View>
+
+                                            </ListView>
+
+                                        </Grid>
+                                    </ContentPresenter.Content>
+                                </ContentPresenter>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type GroupItem}" x:Key="craT5008GridViewContainerStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupItem}">
+                            <Expander x:Name="RootExpanderGroupStyle" BorderBrush="#FFA4B97F" BorderThickness="0,0,0,1" IsExpanded="True">
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal" Height="40">
+                                        <TextBlock Text="{Binding Name}"
+                                               Margin="10,0"
+                                               VerticalAlignment="Center"
+                                               Foreground="Black"
+                                               FontSize="16" />
+                                        <TextBlock Text="{Binding ItemCount}"
+                                               FontSize="14"
+                                               Foreground="Gray"
+                                               Margin="5,0,0,0"
+                                               VerticalAlignment="Center" />
+                                        <TextBlock Text=" item(s)"
+                                               FontSize="14"
+                                               Foreground="Gray"
+                                               VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Expander.Header>
+                                <StackPanel Orientation="Vertical">
+                                    <GridViewHeaderRowPresenter 
+                                    Columns="{Binding Columns}"
+                                    DataContext="{Binding View, RelativeSource={RelativeSource FindAncestor, ListView, 1}}"
+                                    Visibility="Visible" />
+                                    <ItemsPresenter />
+                                </StackPanel>
+                            </Expander>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <local:T5008GroupContainerStyleSelector x:Key="T5008GroupContainerStyleSelector" 
+                                                            RootGroupStyle="{StaticResource craT5008GridViewContainerStyle}"
+                                                            SingleIssuerGroupStyle="{StaticResource craT5008GroupStyle}" 
+                                                            MultipleIssuerGroupStyle="{StaticResource craT5008ExpanderGroupStyle}">
+            </local:T5008GroupContainerStyleSelector>
+            <GridView x:Key="t5008Slip" x:Shared="False" AllowsColumnReorder="true"
+                  ColumnHeaderContainerStyle="{StaticResource craGridViewColumnHeaderStyle}">
+
+                <GridViewColumn Width="300"
+                            Header="History">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                
+                                <TextBlock HorizontalAlignment="Center" Margin="10,0,0,0"
+                                       FontSize="14"
+                                       Text="{Binding History }" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+
+                <GridViewColumn Width="150"
+                            Header="Issuer">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock 
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Issuer}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+
+                <GridViewColumn Width="133" Header="Gross">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock 
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Gross}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+
+                <GridViewColumn Width="133"
+                            Header="Cost">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="80"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Cost}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+
+              
+            </GridView>
+            <CollectionViewSource Source="{Binding T5008Slips}" x:Key="T5008SlipsViewSource">
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="Heading" />
+                    <PropertyGroupDescription PropertyName="Issuer"/>
+                </CollectionViewSource.GroupDescriptions>
+            </CollectionViewSource>
+            <!-- T5008 Styles -->
+            
+        </Grid.Resources>
+        <ScrollViewer HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+            <ListView x:Name="T5008ListView"
+                                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                        ScrollViewer.CanContentScroll="True"
+                                        BorderThickness="0"                                   
+                                        ItemsSource="{Binding Source={StaticResource T5008SlipsViewSource}}" 
+                                        View="{StaticResource t5008Slip}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="BorderBrush" Value="#BABEC5" />
+                        <Setter Property="BorderThickness" Value="0,0,0,0.5" />
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Focusable" Value="false" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.GroupStyle>
+                    <GroupStyle        ContainerStyleSelector="{StaticResource  T5008GroupContainerStyleSelector}"/>
+                </ListView.GroupStyle>
+            </ListView>
+        </ScrollViewer>
+    </Grid>
+</Window>
