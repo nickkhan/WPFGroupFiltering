@@ -258,6 +258,7 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <CheckBox Grid.Column="0" Name="MultiIssuerCheckbox" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsSelected}" Command="{Binding SelectAllSlipsInGroupCommand}" >
+                                                    
                                                             <CheckBox.CommandParameter>
                                                                 <MultiBinding Converter="{StaticResource GroupedIssuerSelectConverter}">
                                                                     <Binding Path="IsChecked" RelativeSource="{RelativeSource Mode=Self}"></Binding>
@@ -304,7 +305,7 @@
 
                                         <DataTemplate>
                                             <Border CornerRadius="0" BorderThickness="0,1,0,0" BorderBrush="#BABEC5">
-                                                <Grid>
+                                                <Grid Background="#ECEEF1">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="40"></RowDefinition>
                                                     </Grid.RowDefinitions>
@@ -464,7 +465,7 @@
                 <GridViewColumn x:Name="grossCol" Width="100" Header="Gross">
                     <GridViewColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Label FontSize="12" Content="{Binding}"  Width="75" HorizontalContentAlignment="Right"></Label>
+                            <Label FontSize="12" Content="{Binding}"  Width="100" HorizontalContentAlignment="Right"></Label>
                         </DataTemplate>
                     </GridViewColumn.HeaderTemplate>
                     
@@ -474,7 +475,7 @@
                             Header="Cost">
                     <GridViewColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Label FontSize="12" Content="{Binding}"  Width="75" HorizontalContentAlignment="Right"></Label>
+                            <Label FontSize="12" Content="{Binding}"  Width="100" HorizontalContentAlignment="Right"></Label>
                         </DataTemplate>
                     </GridViewColumn.HeaderTemplate>
                 </GridViewColumn>
@@ -482,7 +483,7 @@
                 <GridViewColumn x:Name="actionCol" Width="200" Header="Action">
                     <GridViewColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Label FontSize="12" Content="{Binding}" Width="150" HorizontalContentAlignment="Right"></Label>
+                            <Label FontSize="12" Content="{Binding}" Width="200" HorizontalContentAlignment="Right"></Label>
                         </DataTemplate>
                     </GridViewColumn.HeaderTemplate>
 
