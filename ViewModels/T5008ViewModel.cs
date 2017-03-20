@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Collections.ObjectModel;
 
 namespace T5008SlipView.ViewModels
 {
@@ -31,7 +34,7 @@ namespace T5008SlipView.ViewModels
         public T5008SlipViewModel()
         {
             ToggleExpandAllCommand = new DelegateCommand(() => IsExpanded = !IsExpanded);
-
+            SelectAllSlipsInGroupCommand = new DelegateCommand<object>(SelectAllSlipsInGroup);
             SlipActionList = new List<string>();
         }
 
@@ -60,6 +63,31 @@ namespace T5008SlipView.ViewModels
             }
         }
 
+        private DelegateCommand<object> selectAllSlipsInGroupCommand;
+        public DelegateCommand<object> SelectAllSlipsInGroupCommand
+        {
+            get
+            {
+                return selectAllSlipsInGroupCommand;
+            }
+            set
+            {
+                selectAllSlipsInGroupCommand = value;
+            }
+        }
+        private void SelectAllSlipsInGroup(object groupedItems)
+        {
+            var groupedParams = groupedItems as List<object>;
+
+            bool isChecked = (bool)groupedParams[0];
+
+            var issuerCVG = groupedParams[1] as ReadOnlyObservableCollection<object>;
+
+            foreach (T5008SlipViewModel item in issuerCVG)
+            {
+                item.IsSelected = isChecked;
+            }
+        }
         public Guid Id { get; set; }
 
         public string History
@@ -120,6 +148,11 @@ namespace T5008SlipView.ViewModels
                 cost = value;
                 OnPropertyChanged(() => Cost);
             }
+        }
+
+        public string ActionText
+        {
+            get { return "ACTION"; }
         }
 
         public bool IsSelected

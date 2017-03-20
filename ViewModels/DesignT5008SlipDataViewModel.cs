@@ -58,7 +58,7 @@ namespace T5008SlipView.ViewModels
                 Heading = "T5008 Statement",
                 Issuer = "QuestTrade",
                 Gross = "1021.21",
-                Cost = "2020.20",
+                Cost = "2020.22",
                 IsSelected = false,
                 SlipActionList = new List<string>()
                 {
@@ -94,7 +94,7 @@ namespace T5008SlipView.ViewModels
                 Heading = "T5008 Statement",
                 Issuer = "TD WaterHouse",
                 Gross = "1021.21",
-                Cost = "2020.20",
+                Cost = "2020.24",
                 IsSelected = false,
                 SlipActionList = new List<string>()
                 {
@@ -130,7 +130,7 @@ namespace T5008SlipView.ViewModels
                 Heading = "T5008 Statement",
                 Issuer = "TD WaterHouse",
                 Gross = "1021.21",
-                Cost = "2020.20",
+                Cost = "2125.23",
                 IsSelected = false,
                 SlipActionList = new List<string>()
                 {
@@ -229,7 +229,23 @@ namespace T5008SlipView.ViewModels
                 TotalSlips = 0,
                 T5008SlipExpand = new List<T5008SlipDetail>()
             });
-
+            T5008Slips.Add(new T5008SlipViewModel()
+            {
+                Id = Guid.Parse("dea9f65f-68ae-4fe1-a053-c45ec70eccbc"),
+                History = "MSFT",
+                Type = "T5008 Statement",
+                Heading = "T5008 Statement",
+                Issuer = "Sun Financial",
+                Gross = "2021.21",
+                Cost = "2020.20",
+                IsSelected = false,
+                SlipActionList = new List<string>()
+                {
+                    "Add As New"
+                },
+                TotalSlips = 0,
+                T5008SlipExpand = new List<T5008SlipDetail>()
+            });
 
         }
         public ObservableCollection<T5008SlipViewModel> T5008Slips

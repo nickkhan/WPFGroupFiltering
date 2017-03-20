@@ -7,11 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using T5008SlipView.ViewModels;
@@ -25,13 +27,21 @@ namespace T5008SlipView
     {
         public MainWindow()
         {
+            System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("fr-FR");
+            System.Threading.Thread.CurrentThread.CurrentCulture = ci;
+
             this.DataContext = new DesignModel_GroupByIssuer();
             InitializeComponent();
         }
 
 
-        private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ListView_PreviewMouseLeftButtonDown(object sender, RoutedEventArgs e)
         {
+            if (((e.OriginalSource as FrameworkElement).TemplatedParent as ToggleButton) != null || ((e.OriginalSource as FrameworkElement).DataContext as T5008SlipViewModel)==null)
+            {
+                return;
+            }
+
             var cvg = ((sender as ListView).DataContext) as CollectionViewGroup;
             var elem = this as MainWindow;
             
@@ -40,10 +50,12 @@ namespace T5008SlipView
             
             var groupExpander = FindChildByGroup<Expander>(cc, cvg.Name.ToString());
             if (groupExpander != null)
+            {
                 groupExpander.IsExpanded = !groupExpander.IsExpanded;
+            }
 
         }
-
+      
         public static T FindChild<T>(DependencyObject parent) where T : DependencyObject
         {
             // Confirm parent and childName are valid. 

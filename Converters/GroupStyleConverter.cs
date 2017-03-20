@@ -6,6 +6,7 @@ using System.Linq;
 using System.Globalization;
 using System.Windows.Data;
 using T5008SlipView.ViewModels;
+using System.Windows.Controls;
 
 namespace T5008SlipView.Converters
 {
@@ -18,7 +19,7 @@ namespace T5008SlipView.Converters
             float gross=0;
             foreach (T5008SlipViewModel t5008slip in collection.ToArray())
             {
-                gross += float.Parse(t5008slip.Gross);
+                gross += float.Parse(t5008slip.Gross, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
             }
 
             return (int)gross;
@@ -38,11 +39,11 @@ namespace T5008SlipView.Converters
 
             float costs = 0;
             foreach (T5008SlipViewModel t5008slip in collection.ToArray())
-            {
-                costs += float.Parse(t5008slip.Cost);
+            {               
+                costs += float.Parse(t5008slip.Cost, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
             }
 
-            return (int)costs;
+            return costs;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -55,27 +56,29 @@ namespace T5008SlipView.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-
-
             var collection = value as ReadOnlyObservableCollection<object>;
+            
+            if (collection == null || collection.Count == 0)
+                return value;
 
-            if (collection.Count > 1)
-            {
-                List<object> col = new List<object>();
-                col.Add(collection.First());
-
-                return col.AsEnumerable<object>() ;
-            }
-            else
-            {
-                List<object> col = new List<object>();
-                col.Add(collection.First());
-                return col.AsEnumerable<object>();
-            }
-
+            return collection.First();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }        
+    }
+    public class GroupedIssuerSelectConverter : IMultiValueConverter
+    {
+
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+
+            return values.ToList();
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
