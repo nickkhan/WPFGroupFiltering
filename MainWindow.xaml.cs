@@ -29,15 +29,17 @@ namespace T5008SlipView
         {
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("fr-FR");
             System.Threading.Thread.CurrentThread.CurrentCulture = ci;
+            var context = new DesignModel_GroupByIssuer();
+            
+            this.DataContext = context;
 
-            this.DataContext = new DesignModel_GroupByIssuer();
             InitializeComponent();
         }
 
 
         private void ListView_PreviewMouseLeftButtonDown(object sender, RoutedEventArgs e)
         {
-            if (((e.OriginalSource as FrameworkElement).TemplatedParent as ToggleButton) != null || ((e.OriginalSource as FrameworkElement).DataContext as T5008SlipViewModel)==null)
+            if (((e.OriginalSource as FrameworkElement).TemplatedParent as ToggleButton) != null || ((e.OriginalSource as FrameworkElement).DataContext as T5008SlipModel)==null)
             {
                 return;
             }
@@ -224,6 +226,45 @@ namespace T5008SlipView
 
             return foundChild;
         }
+
+        private void cbImportAllSlips_Click(object sender, RoutedEventArgs e)
+        {
+            var cb = e.Source as CheckBox;
+            if (!cb.IsChecked.HasValue)
+                cb.IsChecked = false;
+        }
+
+        //private void cbImportAllSlips_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    var checkbox = e.OriginalSource as CheckBox;
+        //    var lv = (checkbox.DataContext as CollectionViewGroup);
+        //    var groupname = lv.Name;
+
+        //    foreach (var slipItems in lv.Items)
+        //    {
+        //        var subSlipItems = (slipItems as CollectionViewGroup).Items;
+        //        foreach (T5008SlipViewModel slip in subSlipItems)
+        //        {
+        //            slip.IsSelected = true;
+        //        }                
+        //    }
+        //}
+
+        //private void cbImportAllSlips_Unchecked(object sender, RoutedEventArgs e)
+        //{
+        //    var checkbox = e.OriginalSource as CheckBox;
+        //    var lv = (checkbox.DataContext as CollectionViewGroup);
+        //    var groupname = lv.Name;
+
+        //    foreach (var slipItems in lv.Items)
+        //    {
+        //        var subSlipItems = (slipItems as CollectionViewGroup).Items;
+        //        foreach (T5008SlipViewModel slip in subSlipItems)
+        //        {
+        //            slip.IsSelected = false;
+        //        }
+        //    }
+        //}
 
     }
 

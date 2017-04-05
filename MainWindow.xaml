@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:T5008SlipView"
         xmlns:ViewModels="clr-namespace:T5008SlipView.ViewModels"
         xmlns:converters="clr-namespace:T5008SlipView.Converters" 
-        
+        xmlns:prism="http://prismlibrary.com/"
         d:DataContext="{d:DesignInstance ViewModels:DesignModel_GroupByIssuer, IsDesignTimeCreatable=True}"
         Title="MainWindow"         Height="600"
         Width="800" ResizeMode="NoResize">
@@ -226,6 +226,7 @@
             <converters:ListToTopItemConverter x:Key="ListToTopItemConverter"></converters:ListToTopItemConverter>
             <converters:GrossProceedsConverter x:Key="GrossProceedsConverter"></converters:GrossProceedsConverter>
             <converters:GroupedIssuerSelectConverter x:Key="GroupedIssuerSelectConverter"></converters:GroupedIssuerSelectConverter>
+            <converters:SlipCollectionToBooleanConverter x:Key="SlipCollectionToBooleanConverter"></converters:SlipCollectionToBooleanConverter>
             
             <converters:CostConverter x:Key="CostConverter"></converters:CostConverter>
             <Style TargetType="GridViewColumnHeader" x:Key="craGridViewColumnHeaderStyle">
@@ -240,7 +241,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type GroupItem}">
                            
-                                <Expander x:Name="MultipleIssuerExpanderGroupStyle" BorderThickness="0,0,0,1" BorderBrush="#BABEC5" Style="{DynamicResource ExpanderNoGlyph}">                                    
+                                <Expander x:Name="MultipleIssuerExpanderGroupStyle" BorderThickness="0,0,0,1" BorderBrush="#BABEC5" Style="{DynamicResource ExpanderNoGlyph}">
                                     <Expander.Header>                                        
                                         <ContentPresenter>
                                             <ContentPresenter.Content>
@@ -257,16 +258,15 @@
                                                             <ColumnDefinition Width="200"></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
 
-                                                        <CheckBox Grid.Column="0" Name="MultiIssuerCheckbox" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsSelected}" Command="{Binding SelectAllSlipsInGroupCommand}" >
-                                                    
+                                                        <CheckBox Grid.Column="0" Name="MultiIssuerCheckbox" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsSelected}" >
                                                             <CheckBox.CommandParameter>
                                                                 <MultiBinding Converter="{StaticResource GroupedIssuerSelectConverter}">
-                                                                    <Binding Path="IsChecked" RelativeSource="{RelativeSource Mode=Self}"></Binding>
-                                                                    <Binding Path="DataContext.Items" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Expander}"></Binding>
+                                                                <Binding Path="DataContext.Items" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Expander}"></Binding>
+                                                                <Binding Path="IsChecked" RelativeSource="{RelativeSource Mode=Self}"></Binding>
                                                                 </MultiBinding>
                                                             </CheckBox.CommandParameter>
                                                         </CheckBox>
-                                                    
+
                                                         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                                                             <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="12">
                                                                 <Label.Content>
@@ -352,7 +352,8 @@
                                                 <ColumnDefinition Width="100"></ColumnDefinition>
                                                 <ColumnDefinition Width="200"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-
+                                            
+                                            <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsSelected}"></CheckBox>
                                             <Label Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="13" Content="{Binding Issuer}" />
                                             <Label Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="13" Content="{Binding History }" />
                                             <Label Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="13" Content="{Binding Gross}" />
@@ -377,13 +378,233 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <!--Expander No Circle Arrow Template -->
+            <Style x:Key="ExpanderArrowRightHeaderStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="19"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.LayoutTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <TransformCollection>
+                                                        <RotateTransform Angle="-90"/>
+                                                    </TransformCollection>
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Grid.LayoutTransform>
+
+                                        <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderArrowUpHeaderStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="19"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid>
+                                        <Grid.LayoutTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <TransformCollection>
+                                                        <RotateTransform Angle="180"/>
+                                                    </TransformCollection>
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Grid.LayoutTransform>
+
+                                        <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderArrowLeftHeaderStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="19"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.LayoutTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <TransformCollection>
+                                                        <RotateTransform Angle="90"/>
+                                                    </TransformCollection>
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Grid.LayoutTransform>
+
+                                        <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderArrowHeaderFocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border>
+                                <Rectangle Margin="0" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderArrowDownHeaderStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="19"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Path x:Name="arrow" Grid.Column="1"  Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                    <ContentPresenter Grid.Column="0" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ExpanderArrowStyle" TargetType="{x:Type Expander}">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Expander}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="3" SnapsToDevicePixels="true">
+                                <DockPanel>
+                                    <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" Content="{TemplateBinding Header}" DockPanel.Dock="Top" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{StaticResource ExpanderArrowHeaderFocusVisual}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" MinWidth="0" MinHeight="0" Padding="{TemplateBinding Padding}" Style="{StaticResource ExpanderArrowDownHeaderStyle}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <ContentPresenter x:Name="ExpandSite" DockPanel.Dock="Bottom" Focusable="false" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </DockPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsExpanded" Value="true">
+                                    <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="ExpandDirection" Value="Right">
+                                    <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Right"/>
+                                    <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Left"/>
+                                    <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderArrowRightHeaderStyle}"/>
+                                </Trigger>
+                                <Trigger Property="ExpandDirection" Value="Up">
+                                    <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Top"/>
+                                    <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Bottom"/>
+                                    <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderArrowUpHeaderStyle}"/>
+                                </Trigger>
+                                <Trigger Property="ExpandDirection" Value="Left">
+                                    <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Left"/>
+                                    <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Right"/>
+                                    <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderArrowLeftHeaderStyle}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <Style TargetType="{x:Type GroupItem}" x:Key="craT5008GridViewContainerStyle">
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type GroupItem}">
                             <Border CornerRadius="0" BorderThickness="1" BorderBrush="#BABEC5">
-                                <Expander x:Name="RootExpanderGroupStyle" IsExpanded="True">
+                                <Expander x:Name="RootExpanderGroupStyle" IsExpanded="True" Style="{StaticResource ExpanderArrowStyle}">
                                     <Expander.Header>
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -392,24 +613,55 @@
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
+                                            
+                                            <CheckBox x:Name="cbImportAllSlips"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"                                                      
+                                                      Grid.Column="0"                                                     
+                                                      IsThreeState="True">
+                                                <CheckBox.IsChecked>
+                                                    <MultiBinding Converter="{StaticResource SlipCollectionToBooleanConverter}" Mode="OneWay">
+                                                        <MultiBinding.Bindings>
+                                                            <Binding Path="DataContext.T5008Slips" RelativeSource="{RelativeSource AncestorType=Window}"></Binding>
+                                                            <Binding Path="Name" Mode="OneWay" />
+                                                        </MultiBinding.Bindings>
+                                                    </MultiBinding>
+                                                </CheckBox.IsChecked>
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Checked" >
+                                                        <prism:InvokeCommandAction Command="{Binding DataContext.SelectAllSlipsInGroupCommand,
+                                                            RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                            CommandParameter="{Binding Items}"/>
+                                                    </i:EventTrigger>
 
-                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding Name}"
+                                                    <i:EventTrigger EventName="Click">
+                                                        <prism:InvokeCommandAction Command="{Binding DataContext.IndeterminateTestCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+                                                    </i:EventTrigger>
+                                                    
+                                                    <i:EventTrigger EventName="Unchecked" >
+                                                        <prism:InvokeCommandAction Command="{Binding DataContext.DeSelectAllSlipsInGroupCommand,
+                                                            RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                            CommandParameter="{Binding Items}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </CheckBox>
+                                            <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Text="{Binding Name}"
                                             Margin="5,0,0,0"
                                             VerticalAlignment="Center"
                                             Foreground="Black"
                                             FontSize="16" />
 
-                                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ItemCount}"
+                                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ItemCount}"
                                             FontSize="11"
                                             Foreground="Gray"
                                             Margin="5,0,0,0"
                                             VerticalAlignment="Center" />
 
-                                            <TextBlock Grid.Column="1" Grid.Row="1" Text=" item(s)" HorizontalAlignment="Left" 
-                                            FontSize="11"
-                                            
+                                            <TextBlock Grid.Column="2" Grid.Row="1" Text=" item(s)" HorizontalAlignment="Left" 
+                                            FontSize="11"                                            
                                             Foreground="Gray"
                                             VerticalAlignment="Center" />
                                         </Grid>
@@ -437,8 +689,8 @@
                                                             SingleIssuerGroupStyle="{StaticResource craT5008GroupStyle}" 
                                                             MultipleIssuerGroupStyle="{StaticResource craT5008ExpanderGroupStyle}">
             </local:T5008GroupContainerStyleSelector>
-            
-            
+
+           
             <GridView x:Key="t5008Slip" x:Shared="False" AllowsColumnReorder="true"
                   ColumnHeaderContainerStyle="{StaticResource craGridViewColumnHeaderStyle}">
 

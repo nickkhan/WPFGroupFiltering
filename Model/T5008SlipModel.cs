@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.ComponentModel;
 
 namespace T5008SlipView.ViewModels
 {
@@ -16,7 +18,7 @@ namespace T5008SlipView.ViewModels
     {
         bool IsSelected { get; set; }
     }
-    public class T5008SlipViewModel : BindableBase, ISelectable
+    public class T5008SlipModel : BindableBase, ISelectable
     {
         private List<string> actionList;
         private string selectedAction;
@@ -31,11 +33,9 @@ namespace T5008SlipView.ViewModels
         private int totalSlips;
         private List<T5008SlipDetail> t5008slips;
 
-        public T5008SlipViewModel()
+        public T5008SlipModel()
         {
-            ToggleExpandAllCommand = new DelegateCommand(() => IsExpanded = !IsExpanded);
-            SelectAllSlipsInGroupCommand = new DelegateCommand<object>(SelectAllSlipsInGroup);
-            SlipActionList = new List<string>();
+            
         }
 
         
@@ -62,32 +62,7 @@ namespace T5008SlipView.ViewModels
                 OnPropertyChanged(() => IsExpanded);
             }
         }
-
-        private DelegateCommand<object> selectAllSlipsInGroupCommand;
-        public DelegateCommand<object> SelectAllSlipsInGroupCommand
-        {
-            get
-            {
-                return selectAllSlipsInGroupCommand;
-            }
-            set
-            {
-                selectAllSlipsInGroupCommand = value;
-            }
-        }
-        private void SelectAllSlipsInGroup(object groupedItems)
-        {
-            var groupedParams = groupedItems as List<object>;
-
-            bool isChecked = (bool)groupedParams[0];
-
-            var issuerCVG = groupedParams[1] as ReadOnlyObservableCollection<object>;
-
-            foreach (T5008SlipViewModel item in issuerCVG)
-            {
-                item.IsSelected = isChecked;
-            }
-        }
+        
         public Guid Id { get; set; }
 
         public string History
@@ -206,6 +181,8 @@ namespace T5008SlipView.ViewModels
             }
         }
 
+        public DelegateCommand<object> IndeterminateTestCommand { get; set; }
+
     }
     public class T5008SlipDetail : BaseSlipDetail
     {
@@ -255,4 +232,6 @@ namespace T5008SlipView.ViewModels
         // Ignore on worksheet 
         public int GroupIndex { get; set; }
     }
+
+
 }

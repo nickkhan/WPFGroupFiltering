@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\projects\taxengine\Libraries\Prism\Prism.dll</HintPath>
     </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>..\..\..\..\Downloads\Prism-Samples-Wpf-master\Prism-Samples-Wpf-master\Commanding\packages\Prism.Wpf.6.1.0\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -81,8 +84,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StringResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\DesignT5008SlipDataViewModel.cs" />
-    <Compile Include="ViewModels\T5008ViewModel.cs" />
+    <Compile Include="ViewModels\DesignT5008SlipDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\T5008SlipModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
